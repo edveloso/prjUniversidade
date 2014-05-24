@@ -6,10 +6,8 @@ import javax.persistence.Persistence;
 public class Formulario {
 
 	public static void main(String[] args) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("tarefas");
-		
-
+		EntityManagerFactory factory = Persistence
+				.createEntityManagerFactory("tarefas");
 	}
-	
 
 }
