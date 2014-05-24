@@ -20,11 +20,10 @@ API:
 
 
 Mapeamento
-'''
+
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="CUSTOMER_ID")
 
     @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name="USER_ID", nullable=true)
-'''
 
