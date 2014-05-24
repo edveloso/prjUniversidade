@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.hibernate.service.spi.Manageable;
-
 import modelo.Tarefa;
 
 public class Formulario {
