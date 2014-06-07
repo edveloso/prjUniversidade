@@ -1,17 +1,46 @@
 package janela;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import modelo.Departamento;
+import modelo.Empregado;
+import modelo.Endereco;
 import modelo.Tarefa;
 
 public class Formulario {
 
+	
 	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("tarefas");
+		EntityManager em = factory.createEntityManager();
+		
+		Departamento departamento = new Departamento("rh");
+		
+		Empregado emp1 = new Empregado("hjose", new Endereco("rua b"), departamento);
+		Empregado emp2 = new Empregado("antonio", new Endereco("rua c"), departamento);
+		
+		
+		departamento.getEmpregados().add(emp1);
+		departamento.getEmpregados().add(emp2);
+		em.getTransaction().begin();
+		em.persist(departamento);
+		em.getTransaction().commit();
+		
+		List<Departamento> list = em.createQuery("select d from Departamento d").getResultList();
+		for (Departamento dep : list) {
+			System.out.println(dep.getNome() + " " );
+			  for (Empregado emp : dep.getEmpregados()) {
+				System.out.println(emp.getNome() + " " + emp.getEndereco().getLogradouro());
+			}
+		}
+		
+		
+	}
+	public static void _main(String[] args) {
 		/**
 		//Responsável por pegar as informações no arquivo 
 		//persistence.xml e configurar uma conexão com o 
@@ -60,13 +89,14 @@ public class Formulario {
 			System.out.println(tar.getId() + " " + tar.getDescricao()); 
 		}
 		
-		Tarefa tarefa = em.find(Tarefa.class, 2);
+		Tarefa tarefa = em.find(Tarefa.class, 2l);
 		tarefa.setDescricao("Aprender Orientação a objetos");
 		
 		em.getTransaction().begin();
 		em.merge(tarefa);
 		em.getTransaction().commit();
-		
+		em.close();
+		factory.close();
 		
 
 	}

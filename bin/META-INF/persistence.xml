@@ -11,6 +11,9 @@
 
    <!-- entidade mapeada -->
    <class>modelo.Tarefa</class>
+   <class>modelo.Departamento</class>
+   <class>modelo.Empregado</class>
+   <class>modelo.Endereco</class>
 
    <properties>
   <!-- dados da conexao -->
